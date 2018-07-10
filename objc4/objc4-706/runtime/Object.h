@@ -42,6 +42,11 @@ __IOS_UNAVAILABLE __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE
 OBJC_ROOT_CLASS
 
 // objc4/objc4-706/runtime/Object.h
+/**
+ ---> objc-private.h
+ typedef struct objc_class *Class;
+ typedef struct objc_object *id;
+ */
 @interface Object
 {
 	Class isa;	/* A pointer to the instance's class structure */

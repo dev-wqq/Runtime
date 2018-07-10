@@ -51,7 +51,11 @@ OBJC_AVAILABLE(10.0, 2.0, 9.0, 1.0)
 OBJC_ROOT_CLASS
 OBJC_EXPORT
 
-/// objc4/objc4-706/runtime/NSObject.h
+/**
+ ---> objc-private.h
+ typedef struct objc_class *Class;
+ typedef struct objc_object *id;
+ */
 @interface NSObject <NSObject> {
     Class isa  OBJC_ISA_AVAILABILITY;
 }

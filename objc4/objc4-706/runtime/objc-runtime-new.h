@@ -1059,9 +1059,9 @@ public:
 // objc4/objc4-706/runtime/objc-runtime-new.h
 struct objc_class : objc_object {
     // Class ISA;
-    Class superclass;
-    cache_t cache;             // formerly cache pointer and vtable
-    class_data_bits_t bits;    // class_rw_t * plus custom rr/alloc flags
+    Class superclass;          // 父类的指针
+    cache_t cache;             // formerly cache pointer and vtable 方法缓存
+    class_data_bits_t bits;    // class_rw_t * plus custom rr/alloc flags 实例方法链表
 
     class_rw_t *data() { 
         return bits.data();

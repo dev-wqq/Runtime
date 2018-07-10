@@ -25,6 +25,10 @@
 		393CEAC60DC69E67000B69DE /* objc-references.h in Headers */ = {isa = PBXBuildFile; fileRef = 393CEAC50DC69E67000B69DE /* objc-references.h */; };
 		39ABD72312F0B61800D1054C /* objc-weak.h in Headers */ = {isa = PBXBuildFile; fileRef = 39ABD71F12F0B61800D1054C /* objc-weak.h */; };
 		39ABD72412F0B61800D1054C /* objc-weak.mm in Sources */ = {isa = PBXBuildFile; fileRef = 39ABD72012F0B61800D1054C /* objc-weak.mm */; };
+		6F7F52B820F428F1008ED9EE /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libobjc.A.dylib */; };
+		6F7F52BE20F4367B008ED9EE /* DWTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F52BD20F4367B008ED9EE /* DWTestObject.m */; };
+		6F7F52C420F439D2008ED9EE /* DWFather.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F52C320F439D2008ED9EE /* DWFather.m */; };
+		6F7F52C720F45D79008ED9EE /* DWTestMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F52C620F45D79008ED9EE /* DWTestMethod.m */; };
 		74F5553B1FEBFF5900496E84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F5553A1FEBFF5900496E84 /* main.m */; };
 		830F2A740D737FB800392440 /* objc-msg-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 830F2A690D737FB800392440 /* objc-msg-arm.s */; };
 		830F2A750D737FB900392440 /* objc-msg-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 830F2A6A0D737FB800392440 /* objc-msg-i386.s */; };
@@ -140,6 +144,12 @@
 		393CEAC50DC69E67000B69DE /* objc-references.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-references.h"; path = "runtime/objc-references.h"; sourceTree = "<group>"; };
 		39ABD71F12F0B61800D1054C /* objc-weak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-weak.h"; path = "runtime/objc-weak.h"; sourceTree = "<group>"; };
 		39ABD72012F0B61800D1054C /* objc-weak.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "objc-weak.mm"; path = "runtime/objc-weak.mm"; sourceTree = "<group>"; };
+		6F7F52BC20F4367B008ED9EE /* DWTestObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DWTestObject.h; sourceTree = "<group>"; };
+		6F7F52BD20F4367B008ED9EE /* DWTestObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DWTestObject.m; sourceTree = "<group>"; };
+		6F7F52C220F439D2008ED9EE /* DWFather.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DWFather.h; sourceTree = "<group>"; };
+		6F7F52C320F439D2008ED9EE /* DWFather.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DWFather.m; sourceTree = "<group>"; };
+		6F7F52C520F45D79008ED9EE /* DWTestMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DWTestMethod.h; sourceTree = "<group>"; };
+		6F7F52C620F45D79008ED9EE /* DWTestMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DWTestMethod.m; sourceTree = "<group>"; };
 		74F555381FEBFF5900496E84 /* debug-objc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "debug-objc"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74F5553A1FEBFF5900496E84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		830F2A690D737FB800392440 /* objc-msg-arm.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = "objc-msg-arm.s"; path = "runtime/Messengers.subproj/objc-msg-arm.s"; sourceTree = "<group>"; };
@@ -233,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F7F52B820F428F1008ED9EE /* libobjc.A.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +270,7 @@
 				838485B20D6D67F900CEA253 /* Other */,
 				74F555391FEBFF5900496E84 /* debug-objc */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				6F7F52BA20F42924008ED9EE /* Frameworks */,
 			);
 			name = objc;
 			sourceTree = "<group>";
@@ -326,10 +338,39 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		74F555391FEBFF5900496E84 /* debug-objc */ = {
+		6F7F52BA20F42924008ED9EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F7F52C820F45F67008ED9EE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F7F52BC20F4367B008ED9EE /* DWTestObject.h */,
+				6F7F52BD20F4367B008ED9EE /* DWTestObject.m */,
+				6F7F52C220F439D2008ED9EE /* DWFather.h */,
+				6F7F52C320F439D2008ED9EE /* DWFather.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6F7F52C920F45F82008ED9EE /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				74F5553A1FEBFF5900496E84 /* main.m */,
+				6F7F52C520F45D79008ED9EE /* DWTestMethod.h */,
+				6F7F52C620F45D79008ED9EE /* DWTestMethod.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		74F555391FEBFF5900496E84 /* debug-objc */ = {
+			isa = PBXGroup;
+			children = (
+				6F7F52C920F45F82008ED9EE /* Main */,
+				6F7F52C820F45F67008ED9EE /* Model */,
 			);
 			path = "debug-objc";
 			sourceTree = "<group>";
@@ -515,6 +556,9 @@
 					837F67A81A771F63004D34FA = {
 						CreatedOnToolsVersion = 6.3;
 					};
+					D2AAC0620554660B00DB518D = {
+						DevelopmentTeam = M2XU6NPV6D;
+					};
 				};
 			};
 			buildConfigurationList = 1DEB914E08733D8E0010E9CD /* Build configuration list for PBXProject "objc" */;
@@ -526,6 +570,7 @@
 				Japanese,
 				French,
 				German,
+				Base,
 			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* objc */;
 			projectDirPath = "";
@@ -576,6 +621,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				74F5553B1FEBFF5900496E84 /* main.m in Sources */,
+				6F7F52C720F45D79008ED9EE /* DWTestMethod.m in Sources */,
+				6F7F52BE20F4367B008ED9EE /* DWTestObject.m in Sources */,
+				6F7F52C420F439D2008ED9EE /* DWFather.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,7 +703,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = M2XU6NPV6D;
 				DYLIB_CURRENT_VERSION = 228;
 				EXECUTABLE_PREFIX = lib;
 				GCC_CW_ASM_SYNTAX = NO;
@@ -715,6 +765,8 @@
 		1DEB914C08733D8E0010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = M2XU6NPV6D;
 				DYLIB_CURRENT_VERSION = 228;
 				EXECUTABLE_PREFIX = lib;
 				GCC_CW_ASM_SYNTAX = NO;
@@ -889,7 +941,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = M2XU6NPV6D;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -943,7 +995,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = M2XU6NPV6D;
 				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

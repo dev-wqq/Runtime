@@ -54,20 +54,21 @@ typedef struct objc_property *objc_property_t;
 
 
 // objc4/objc4-706/runtime/runtime.h
+/** 在 Objc2.0 之前，objc_class 源码 */
 struct objc_class {
     /** isa 其实就是objc_class的结构类型，指向的结构是这个类的元类*/
     Class isa  OBJC_ISA_AVAILABILITY;
 
 #if !__OBJC2__
-    Class super_class                     /** 父类 */                               OBJC2_UNAVAILABLE;
-    const char *name                      /** 类名 */                               OBJC2_UNAVAILABLE;
-    long version                          /** 类的版本信息，默认为0 */                 OBJC2_UNAVAILABLE;
-    long info                             /** 类信息，供运行期使用的一些位标识 */        OBJC2_UNAVAILABLE;
-    long instance_size                    /** 该类的实例变量大小 */                   OBJC2_UNAVAILABLE;
-    struct objc_ivar_list *ivars          /** 成员变量列表 */                        OBJC2_UNAVAILABLE;
-    struct objc_method_list **methodLists /** 实例方法列表 */                        OBJC2_UNAVAILABLE;
-    struct objc_cache *cache              /** 使用sel做为key维护的哈希表，实现缓存 */    OBJC2_UNAVAILABLE;
-    struct objc_protocol_list *protocols  /** 协议列表 */                            OBJC2_UNAVAILABLE;
+    Class super_class                        OBJC2_UNAVAILABLE; // 父类
+    const char *name                         OBJC2_UNAVAILABLE; // 类名
+    long version                             OBJC2_UNAVAILABLE; // 类的版本信息，默认为0
+    long info                                OBJC2_UNAVAILABLE; // 类信息，供运行期使用的一些位标识
+    long instance_size                       OBJC2_UNAVAILABLE; // 该类的实例变量大小
+    struct objc_ivar_list *ivars             OBJC2_UNAVAILABLE; // 成员变量列表的指针
+    struct objc_method_list **methodLists    OBJC2_UNAVAILABLE; // 方法列表的指针
+    struct objc_cache *cache                 OBJC2_UNAVAILABLE; // 使用sel做为key维护的哈希表，实现缓存
+    struct objc_protocol_list *protocols     OBJC2_UNAVAILABLE; // 协议列表
 #endif
 
 } OBJC2_UNAVAILABLE;

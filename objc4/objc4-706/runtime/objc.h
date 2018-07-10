@@ -38,7 +38,6 @@
 
 /// An opaque type that represents an Objective-C class.
 
-/// objc4/objc4-706/runtime/objc.h
 typedef struct objc_class *Class;
 
 /// Represents an instance of a class.

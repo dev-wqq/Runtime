@@ -48,7 +48,6 @@
 struct objc_class;
 struct objc_object;
 
-// objc4/objc4-706/runtime/objc-private.h
 typedef struct objc_class *Class;
 typedef struct objc_object *id;
 
