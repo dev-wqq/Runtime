@@ -29,6 +29,7 @@ typedef uint32_t mask_t;  // x86_64 & arm64 asm are less efficient with 16-bits
 #else
 typedef uint16_t mask_t;
 #endif
+// typedef unsigned long        uintptr_t;
 typedef uintptr_t cache_key_t;
 
 struct swift_class_t;
@@ -37,7 +38,7 @@ struct swift_class_t;
 struct bucket_t {
 private:
     cache_key_t _key;
-    IMP _imp;
+    IMP _imp;  // 函数指针，指向了一个方法的具体实现
 
 public:
     inline cache_key_t key() const { return _key; }
@@ -50,9 +51,10 @@ public:
 
 
 struct cache_t {
+    // 其实就是一个散列表，用来存储 Method 的链表
     struct bucket_t *_buckets;
-    mask_t _mask;
-    mask_t _occupied;
+    mask_t _mask;             // 分配用来缓存 bucket 的总数
+    mask_t _occupied;         // 表明目前实际占用的缓存 bucket 的个数
 
 public:
     struct bucket_t *buckets();
@@ -205,9 +207,9 @@ struct entsize_list_tt {
 
 
 struct method_t {
-    SEL name;
-    const char *types;
-    IMP imp;
+    SEL name;           // 方法名
+    const char *types;  // Type Encoding 类型编码
+    IMP imp;            // 函数指针，指向函数的具体实现（runtime 中消息传递和消息转发就是为了找到IMP, 并且执行函数）
 
     struct SortBySELAddress :
         public std::binary_function<const method_t&,
@@ -798,11 +800,12 @@ class protocol_array_t :
 };
 
 
+// objc 2.0 之后 objc的类的属性、方法、遵循的协议 放在了 class_rw_t 结构体里面
 struct class_rw_t {
     // Be warned that Symbolication knows the layout of this structure.
     uint32_t flags;
     uint32_t version;
-
+    //
     const class_ro_t *ro;
 
     method_array_t methods;
@@ -1060,8 +1063,10 @@ public:
 struct objc_class : objc_object {
     // Class ISA;
     Class superclass;          // 父类的指针
+    // 优化方法调用的性能。
     cache_t cache;             // formerly cache pointer and vtable 方法缓存
-    class_data_bits_t bits;    // class_rw_t * plus custom rr/alloc flags 实例方法链表
+    // 实际上相当于 class_rw_t 指针加载 rr/alloc 的标志
+    class_data_bits_t bits;    // class_rw_t * plus custom rr/alloc flags
 
     class_rw_t *data() { 
         return bits.data();

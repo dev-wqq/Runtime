@@ -64,8 +64,6 @@ namespace {
 #   error bad config
 #endif
 
-
-// objc4/objc4-706/runtime/objc-private.h
 union isa_t 
 {
     isa_t() { }
@@ -88,18 +86,40 @@ union isa_t
     // uintptr_t extraBytes : 1;  // allocated with extra bytes
 
 # if __arm64__
+    /**
+     ref: 从 NSObject 的初始化了解 isa
+     https://github.com/Draveness/analyze/blob/master/contents/objc/%E4%BB%8E%20NSObject%20%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BA%86%E8%A7%A3%20isa.md
+     */
+    /**
+     ISA_MAGIC_MASK and ISA_MASK 分别是通过掩码的方式获取 MAGIC 值和 isa 类指针。
+     */
 #   define ISA_MASK        0x0000000ffffffff8ULL
 #   define ISA_MAGIC_MASK  0x000003f000000001ULL
-#   define ISA_MAGIC_VALUE 0x000001a000000001ULL
+#   define ISA_MAGIC_VALUE 0x000001a000000001ULL // 11010000000000000000000000000000000000001
+    
     struct {
+        // 是否开启isa指针优化，nonpointer = 1,代表开启isa指针优化
         uintptr_t nonpointer        : 1;
+        // 对象含有活曾经函数关联引用，没有关联引用的可以更快地释放内存
         uintptr_t has_assoc         : 1;
+        // 表示该对象是否有 C++ 或者 Objc 的析构器。
         uintptr_t has_cxx_dtor      : 1;
-        uintptr_t shiftcls          : 33; // MACH_VM_MAX_ADDRESS 0x1000000000
+        /**
+         类的指针，arm64 架构中有33位可以存储类指针
+         源码中 newisa.shiftcls = (uintptr_t)cls >> 3;
+         --> 将当前的地址右移三位的主要原因是用于将Class 指针中无用的后三位清楚减小内存的消耗
+         --> 因为类的指针要按照字节（8 bits）对其内存，其中指针后三位都是没有意义的0。
+         */
+        uintptr_t shiftcls          : 33;     // MACH_VM_MAX_ADDRESS 0x1000000000
+        // 判断对象是否初始化完成，在 arm64 中0x16是调试器判断当前对象是真的对象还是没有初始化的空间。
         uintptr_t magic             : 6;
+        // 对象被指向或着曾经指向一个 ARC 的弱变量，没有弱引用的对象可以更快的释放。
         uintptr_t weakly_referenced : 1;
+        // 对象是否正在释放内存。
         uintptr_t deallocating      : 1;
+        // 判断对象的引用计数是否过大，如果过大则需要其他散列表来进行存储。
         uintptr_t has_sidetable_rc  : 1;
+        // 存放该对象的引用计数值减一后的结果。对象的引用计数超过1，会存在这个里面，如果引用计数位10，ertra_rc的值就为 9.
         uintptr_t extra_rc          : 19;
 #       define RC_ONE   (1ULL<<45)
 #       define RC_HALF  (1ULL<<18)
@@ -184,10 +204,10 @@ public:
     // initClassIsa(): class objects
     // initProtocolIsa(): protocol objects
     // initIsa(): other objects
-    void initIsa(Class cls /*nonpointer=false*/);
+    void initIsa(Class cls /*nonpointer=false*/);       // 仅用于初始化新对象的isa
     void initClassIsa(Class cls /*nonpointer=maybe*/);
     void initProtocolIsa(Class cls /*nonpointer=maybe*/);
-    void initInstanceIsa(Class cls, bool hasCxxDtor);
+    void initInstanceIsa(Class cls, bool hasCxxDtor);   // 没有自定义 RR/AWZ 对象
 
     // changeIsa() should be used to change the isa of existing objects.
     // If this is a new object, use initIsa() for performance.

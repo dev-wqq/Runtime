@@ -197,7 +197,7 @@ objc_object::initInstanceIsa(Class cls, bool hasCxxDtor)
 {
     assert(!cls->instancesRequireRawIsa());
     assert(hasCxxDtor == cls->hasCxxDtor());
-
+    
     initIsa(cls, true, hasCxxDtor);
 }
 
