@@ -22,16 +22,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "runtime/objc-object.h"
-            timestampString = "552912101.8691961"
+            timestampString = "553004084.0156291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "objc_object::initInstanceIsa(Class cls, bool hasCxxDtor)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "objc_object::getIsa()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "debug-objc/Main/DWTestMethod+debug_load.m"
+            timestampString = "553004084.016018"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "+load"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

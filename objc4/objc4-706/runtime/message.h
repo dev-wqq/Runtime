@@ -39,7 +39,8 @@ struct objc_super {
     /// Specifies an instance of a class.
     __unsafe_unretained id receiver;  // self
 
-    /// Specifies the particular superclass of the instance to message. 
+    /// Specifies the particular superclass of the instance to message.
+    // __cplusplus
 #if !defined(__cplusplus)  &&  !__OBJC2__
     /* For compatibility with old objc-runtime.h header */
     __unsafe_unretained Class class;

@@ -8,18 +8,20 @@
 #import <Foundation/Foundation.h>
 #import "DWFather.h"
 
+@interface DWTestMethod : NSObject
+
 #pragma mark - 经典Runtime四个问题
 /**
  问题1：下面代码会输出什么？
  - (instancetype)init {
-    if (self = [super init]) {
-        NSLog(@"%@",NSStringFromClass([self class]));
-        NSLog(@"%@",NSStringFromClass([super class]));
-    }
-    return self;
+ if (self = [super init]) {
+ NSLog(@"%@",NSStringFromClass([self class]));
+ NSLog(@"%@",NSStringFromClass([super class]));
+ }
+ return self;
  }
  */
-extern void testSelfAndSuperDiff(void);
++ (void)testSelfAndSuperDiff;
 
 /**
  问题2：下面的代码的结果？
@@ -28,7 +30,7 @@ extern void testSelfAndSuperDiff(void);
  BOOL res3 = [(id)[DWSon class] isKindOfClass:[DWSon class]];
  BOOL res4 = [(id)[DWSon class] isMemberOfClass:[DWSon class]];
  */
-extern void testKindOfClassAndMemberOfClassDiff(void);
++ (void)testKindOfClassAndMemberOfClassDiff;
 
 /**
  问题3：下面的代码会？Compile Error/ Runtime Crash/ NSLog...?
@@ -38,13 +40,13 @@ extern void testKindOfClassAndMemberOfClassDiff(void);
  
  @implementation NSObject (RuntimeMethod)
  + (void)dw_foo {
-    NSLog(@"call %@",NSStringFromSelector(_cmd));
+ NSLog(@"call %@",NSStringFromSelector(_cmd));
  }
  [NSObject dw_foo];
  [[NSObject new] dw_foo];
  @end
  */
-extern void testCallInstanceAndClassMethodDiff(void);
++ (void)testCallInstanceAndClassMethodDiff;
 
 /**
  问题4:下面的代码会？Compile Error/ Runtime Crash/ NSLog...?
@@ -52,8 +54,9 @@ extern void testCallInstanceAndClassMethodDiff(void);
  void *obj = &cls;
  [(__bridge id)obj dw_inputMyName];
  */
-extern void testPointerCallMethod(void);
 
-@interface DWTestMethod : NSObject
+- (instancetype)initTestMemoryAddress;
+
++ (void)testPointerCallMethod;
 
 @end

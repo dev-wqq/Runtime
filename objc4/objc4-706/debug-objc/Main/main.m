@@ -23,30 +23,36 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
 
-        instrumentObjcMessageSends(YES);
-        DWSubTestObject *subObject = [[DWSubTestObject alloc] init];
-        [subObject testMethod];
-        [subObject testMethod];
+//        instrumentObjcMessageSends(YES);
+//        DWSubTestObject *subObject = [[DWSubTestObject alloc] init];
+//        [subObject testMethod];
+//        [subObject testMethod];
         
 #pragma mark - 直接调方法
         // 不用走消息转发机制
-        void (*dw_directCallMethod)(id, SEL);
-        dw_directCallMethod = (void (*)(id,SEL))[subObject methodForSelector:@selector(dw_test)];
-        dw_directCallMethod(subObject, @selector(dw_test));
+//        void (*dw_directCallMethod)(id, SEL);
+//        dw_directCallMethod = (void (*)(id,SEL))[subObject methodForSelector:@selector(dw_test)];
+//        dw_directCallMethod(subObject, @selector(dw_test));
         
 //        _objc_autoreleasePoolPrint();
 //        _objc_rootRetainCount(subObject);
 #pragma mark - 经典Runtime四个问题
         // self & super 的区别
-        testSelfAndSuperDiff();
+//        [DWTestMethod testSelfAndSuperDiff];
+//        
+//        // isKindOfClass: & isMemberOfClass 的区别
+//        [DWTestMethod testKindOfClassAndMemberOfClassDiff];
+//        
+//        // 实例方法 & 类方法 调用的区别
+//        [DWTestMethod testCallInstanceAndClassMethodDiff];
         
-        // isKindOfClass: & isMemberOfClass 的区别
-        testKindOfClassAndMemberOfClassDiff();
+        // Class 与内存地址
+        DWTestMethod *testObjc = [[DWTestMethod alloc] initTestMemoryAddress] ;
+//        [testObjc testPointerCallMethod];
+//        [DWTestMethod testPointerCallMethod];
         
-        // 实例方法 & 类方法 调用的区别
-        testCallInstanceAndClassMethodDiff();
-        
-//        testPointerCallMethod();
+//        [[[DWTestMethod alloc] init] testPointerCallMethod];
+//        [testObjc2 testPointerCallMethod];
     }
     return 0;
 }
